@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vite.Model.User;
 import com.vite.Repository.UserRepository;
 
+import jakarta.validation.Valid;
+
+
+
 ;
 
 
@@ -28,7 +32,7 @@ public class UserController {
     private UserRepository userRepository;
     
     @PostMapping("/api/users")
-    public User crreateUser(@RequestBody User user){
+    public User createUser(@RequestBody @Valid User user){
         return userRepository.save(user);
     }
 
