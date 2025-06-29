@@ -16,11 +16,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

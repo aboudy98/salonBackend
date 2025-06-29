@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vite.Exception.UserException;
 import com.vite.Model.User;
 import com.vite.Repository.UserRepository;
 
@@ -49,13 +50,13 @@ public class UserController {
             return user.get();
             
         }
-        throw new Exception("User not found with id: " + id);
+        throw new UserException("User not found !");
     }
 
     @PutMapping("/api/users/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) throws Exception{
         User oldUser = userRepository.findById(id).orElseThrow(
-            () -> new Exception("User not found with id: " + id));
+            () -> new UserException("User not found with id: " + id));
             if(user.getFullName() != null){
                 oldUser.setFullName(user.getFullName());
             }
@@ -78,7 +79,7 @@ public class UserController {
     @DeleteMapping("/api/users/{id}")
     public String deleteUser(@PathVariable Long id) throws Exception{
         User user = userRepository.findById(id).orElseThrow(
-            () -> new Exception("User not found with id: " + id));
+            () -> new UserException("User not found with id: " + id));
         userRepository.delete(user);
         return "User deleted successfully with id: " + id;
     }
